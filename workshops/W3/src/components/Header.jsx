@@ -1,14 +1,20 @@
-import { Component  } from "react";
+import { Component } from "react";
 
 class Header extends Component {
 
-  render() {
+    render() {
 
-    return (<header>
-        <h1>Pokemon API</h1>
-        <p>Pokemon API with React</p>
-    </header>);
-  }
+        return (
+
+            <header className="jumbotron text-center">
+               <h1>Pokemon API</h1> 
+               <p>Pokemon API with React</p>
+            </header>
+
+        );
+
+    }
+
 }
 
 export default Header;
