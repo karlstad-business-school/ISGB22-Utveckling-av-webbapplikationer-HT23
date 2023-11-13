@@ -9,7 +9,7 @@ class UIRoot extends Component{
       return (
         <>
         <Header/>
-        <Main/>
+        <Main r="255" g="45" b="100"/>
         <Footer/>
         </>
       );
