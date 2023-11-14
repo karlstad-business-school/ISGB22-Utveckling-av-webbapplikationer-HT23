@@ -1,4 +1,5 @@
 import { Component  } from "react";
+import { Link } from "react-router-dom";
 
 class Reaction extends Component {
 
@@ -13,7 +14,7 @@ class Reaction extends Component {
             <img className="pokemon-card-iamge" alt="Pokemon" src={image}/>
             <p className="pokemon-card-id"># {id}</p>
             <p className="pokemon-card-name">{name}</p>
-            <a href="#" className="pokemon-card-view">View</a>
+            <Link to={"/view/" + id} className="pokemon-card-view">View</Link>
         </div>
         
 

@@ -1,12 +1,17 @@
 import { Component  } from "react";
 import UIRoot from "./components/UIRoot";
 import "./App.css";
+import {BrowserRouter, Routes} from "react-router-dom";
 
 class App extends Component {
 
   render() {
 
-    return ( <UIRoot /> );
+    return ( 
+      <BrowserRouter>
+        <UIRoot /> 
+      </BrowserRouter>
+    );
   }
 }
 

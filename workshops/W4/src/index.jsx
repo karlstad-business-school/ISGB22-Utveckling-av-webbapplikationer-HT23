@@ -1,6 +1,7 @@
 
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import "./index.css";
 
 //createRoot är en del av ReactDOM och innanför paranteserna
 //använder vi Vanilla script (vanlig JS) för att hämta en referens till elementet med 
