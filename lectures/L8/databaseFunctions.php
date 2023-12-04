@@ -1,38 +1,90 @@
 <?php
 
+    /*
+        GRANT ALL ON bilar.* To 'mysqluser'@'localhost' IDENTIFIED BY 'mysqlpassword';
+        FLUSH PRIVILEGES;
+    */
+
     function connectToDatabase() {
-        
-        $dbhsOptions = array(
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-        );
+
+        try {
+            $dsn = "mysql:host=localhost:3306;dbname=bilar;charset=utf8";
+            $username = "mysqluser";
+            $password = "mysqlpassword";
+
+            $dbhsOptions = array(
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+            );
+
+            $dbh = new PDO($dsn, $username, $password, $dbhsOptions);
+
+            return $dbh;
+
+        }catch(PDOException $e) {
+            throw $e;
+        }
     }
 
     function listCarsAsForms($dbh) {
-        ?>
-        <div style='background-color: <?php echo($farg); ?>'>
-            <form action='<?php echo( $_SERVER["PHP_SELF"] ); ?>' method='post'>
-        
-                <p>Fabrikat: <?php echo($fabrikat); ?></p>
-                <p>Modell: <?php echo($modell) ?></p>
-                <input type='hidden' name='hidId' value='<?php echo($id); ?>'>
-                <input type='submit' name='btnEdit' value='Edit'>
-                <input type='submit' name='btnDelete' value='Delete'>
 
-            </form>
-        </div>
-        <?php
+        try {
+
+            $sql = "SELECT * FROM cars ORDER BY id DESC;";
+            $stmt = $dbh->prepare($sql);
+            $stmt->execute();
+
+            while($row = $stmt->fetch()) {
+
+                $farg = $row["farg"];
+                $fabrikat = $row["fabrikat"];
+                $modell = $row["modell"];
+                $id = $row["id"];
+
+                ?>
+
+                <div style='background-color: <?php echo($farg); ?>'>
+                    <form action='<?php echo( $_SERVER["PHP_SELF"] ); ?>' method='post'>
+                
+                        <p>Fabrikat: <?php echo($fabrikat); ?></p>
+                        <p>Modell: <?php echo($modell) ?></p>
+                        <input type='hidden' name='hidId' value='<?php  echo($id); ?>'>
+                        <input type='submit' name='btnEdit' value='Edit'>
+                        <input type='submit' name='btnDelete' value='Delete'>
+
+                    </form>
+                </div>
+
+                <?php
+            
+            }
+
+        }catch(PDOException $e) {
+            throw $e;
+
+        }finally {
+            $stmt = null;
+        }
+
     }
 
     function listCarsAsLinks($dbh) {}
 
-    function deleteCar($dbh, $id) {}
+    function deleteCar($dbh, $id) {
+        //DELETE
+    }
 
-    function updateCar($dbh, $id, $fabrikat, $modell, $regnr, $farg, $mil) {} 
+    function updateCar($dbh, $id, $fabrikat, $modell, $regnr, $farg, $mil) {
+        //UPDATE
+    } 
 
-    function insertCar($dbh, $fabrikat, $modell, $regnr, $farg, $mil) {}
+    function insertCar($dbh, $fabrikat, $modell, $regnr, $farg, $mil) {
+        //INSERT
+    }
 
-    function selectCar($dbh, $id) {}
+    function selectCar($dbh, $id) {
+        //SELECT
+    }
 
     function createForm($row = null) {
 
