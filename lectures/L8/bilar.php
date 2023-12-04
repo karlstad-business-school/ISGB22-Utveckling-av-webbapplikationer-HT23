@@ -12,7 +12,15 @@
         
         <?php
             try {
-                
+
+                if(isset($_POST["btnDelete"])) { //DELETE
+                }
+
+                if(isset($_POST["btnSave"])) { //UPDATE eller INSERT
+                }
+
+                if(isset($_POST["btnEdit"])) { //SELECT eller inte.
+                }
                 
             }catch(PDOException $e) {
                 
