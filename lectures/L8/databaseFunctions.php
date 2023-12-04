@@ -2,7 +2,21 @@
 
     function connectToDatabase() {}
 
-    function listCarsAsForms($dbh) {}
+    function listCarsAsForms($dbh) {
+        ?>
+        <div style='background-color: <?php echo($farg); ?>'>
+            <form action='<?php echo( $_SERVER["PHP_SELF"] ); ?>' method='post'>
+        
+                <p>Fabrikat: <?php echo($fabrikat); ?></p>
+                <p>Modell: <?php echo($modell) ?></p>
+                <input type='hidden' name='hidId' value='<?php echo($id); ?>'>
+                <input type='submit' name='btnEdit' value='Edit'>
+                <input type='submit' name='btnDelete' value='Delete'>
+
+            </form>
+        </div>
+        <?php
+    }
 
     function listCarsAsLinks($dbh) {}
 
