@@ -5,9 +5,19 @@
 
     if( isset( $_POST["skicka"] ) ) {
 
+        if(isset($_COOKIE["antal"])) {
+            $antal = $_COOKIE["antal"];
+        }
+        $antal++;
+        setcookie("antal", $antal, time() + 3600);
+        $stringToEcho = "Du har tryckt " . $antal . " gånger på knappen";
+
+
     }
 
     if(isset($_POST["rensa"])) {
+
+        setcookie("antal", "", time()-3600);
     
     }
 ?>  

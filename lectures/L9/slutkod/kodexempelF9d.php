@@ -5,6 +5,19 @@
 
     if( isset( $_POST["skicka"] ) ) {
 
+        session_start();
+        session_regenerate_id(true);
+
+        if(isset($_SESSION["antal"])) {
+            $antal = $_SESSION["antal"];
+
+        }
+
+        $antal++;
+        $_SESSION["antal"] = $antal;
+
+        $stringToEcho = "Du har tryckt " . $_SESSION["antal"] . " gånger";
+
     }
 
     if(isset($_POST["rensa"])) {
@@ -51,7 +64,7 @@
 
     <body class="container p-2">
         <header class="jumbotron text-center">
-            <h1>PHP F9 - äkna antalet klick på knappen "Skicka"!</h1>
+            <h1>PHP F9 - räkna antalet klick på knappen "Skicka"!</h1>
         </header>
 
         <main>    

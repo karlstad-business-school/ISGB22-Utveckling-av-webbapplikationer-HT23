@@ -31,7 +31,16 @@
 
                 if( isset( $_GET["skicka"] ) ) {
 
-                    //Här skriver du din kod!
+                    $summa = $_GET["summa"];
+                    $antal = $_GET["antal"];
+
+                    $slump = rand(1,6);
+                    $summa+=$slump;
+                    $antal++;
+
+                    echo("<h1>Din summa är " . $summa . "</h1>");
+                    echo("<p>Du har slagit tärningen " . $antal . " gånger</p>");
+                    echo(IMG . (26 + $slump) . "/Die" . $slump . ".svg'/>");
 
                 }
 

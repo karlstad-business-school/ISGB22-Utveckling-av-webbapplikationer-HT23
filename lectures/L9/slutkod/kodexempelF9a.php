@@ -31,7 +31,15 @@
 
                 if( isset( $_POST["skicka"] ) ) {
 
-                    //Här skriver du din kod!
+                    $summa = $_POST["summa"];
+                    $antal = $_POST["antal"];
+
+                    $tal = rand(1,20);
+                    $summa = $summa + $tal;
+                    $antal = $antal + 1;
+
+                    echo("<h1>Din summa är:" . $summa . "</h1>");
+                    echo("<p>Du har slagit tärningen " . $antal . " gånger</p>");
 
                 }
 
