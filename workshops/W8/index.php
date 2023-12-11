@@ -17,6 +17,38 @@
 
             $dbh = new PDO($dataSourceName, $userName, $passWord, $dbhsOptions);
   
+            $username = $_POST["txtUsername"];
+            $password = $_POST["txtPassword"];
+
+            $sql = "SELECT * FROM users WHERE username=:anv AND password=:losen";
+
+            $stmt = $dbh->prepare($sql);
+            $stmt->bindValue(":anv", $username);
+            $stmt->bindValue(":losen", $password);
+
+            $stmt->execute();
+
+            if($stmt->rowCount()>0) {
+                $titel = "Inloggad!!!!";
+                $inloggad="true";
+
+                $sql = "SELECT * FROM cars";
+                $stmt = $dbh->prepare($sql);
+                $stmt->execute();
+
+                $mystr = "<h1>Alla våra schyssta bilar</h1>";
+                while($row = $stmt->fetch()) {
+                    $mystr.="<p>Bilmärke: " . $row["fabrikat"] . "<br>";
+                    $mystr.="Modell: " . $row["modell"] . "</p>";
+                }
+
+
+
+            }
+
+
+
+
 
         }
         catch(PDOException $error){
