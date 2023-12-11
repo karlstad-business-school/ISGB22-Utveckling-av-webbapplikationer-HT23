@@ -1,12 +1,15 @@
 <?php
-
+     session_start();
     $titel = "Logga in";
     $inloggad = "false";
     $mystr = "Ej inloggad";
 
+    
+
     if(isset($_POST['btnLogin'])) {
         
         try {
+           
             $dataSourceName = "mysql:" . "host=localhost;" . "dbname=bilar;" . "charset=utf8";
             $userName = "root";
             $passWord = "";
@@ -31,25 +34,46 @@
             if($stmt->rowCount()>0) {
                 $titel = "Inloggad!!!!";
                 $inloggad="true";
-
-                $sql = "SELECT * FROM cars";
-                $stmt = $dbh->prepare($sql);
-                $stmt->execute();
-
-                $mystr = "<h1>Alla våra schyssta bilar</h1>";
-                while($row = $stmt->fetch()) {
-                    $mystr.="<p>Bilmärke: " . $row["fabrikat"] . "<br>";
-                    $mystr.="Modell: " . $row["modell"] . "</p>";
-                }
-
-
-
+                $mystr = getCars($dbh);
+                $_SESSION["inloggad"]="true";
             }
 
 
+        }
+        catch(PDOException $error){
+            echo("Det gick åt hvete!");
+        }
 
+    }
+    else if(isset($_SESSION["inloggad"])) {
+        $dataSourceName = "mysql:" . "host=localhost;" . "dbname=bilar;" . "charset=utf8";
+        $userName = "root";
+        $passWord = "";
+        $dbhsOptions = array(
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        );
 
+        $dbh = new PDO($dataSourceName, $userName, $passWord, $dbhsOptions);
+        $mystr = getCars($dbh);
+        $inloggad="true";
+    }
 
+    function getCars($dbh) {
+        try {
+            
+            $sql = "SELECT * FROM cars";
+            $stmt = $dbh->prepare($sql);
+            $stmt->execute();
+
+            $mystr = "<h1>Alla våra schyssta bilar</h1>";
+            while($row = $stmt->fetch()) {
+                $mystr.="<p>Bilmärke: " . $row["fabrikat"] . "<br>";
+                $mystr.="Modell: " . $row["modell"] . "</p>";
+            }
+
+            return $mystr;
+  
         }
         catch(PDOException $error){
             echo("Det gick åt hvete!");
