@@ -1,5 +1,5 @@
 <?php
-     session_start();
+    session_start();
     $titel = "Logga in";
     $inloggad = "false";
     $mystr = "Ej inloggad";
